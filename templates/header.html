@@ -6,6 +6,15 @@
         <span>nav1</span>
         <span>nav2</span>
         <span>nav3</span>
-        <span>nav4</span>
+        {% if not user.is_authenticated %}
+        <a href="{% url "accountapp:login" %}?next={{ request.path }}">
+            <span>Login</span>
+        </a>
+        {% else %}
+        <form style="display: inline;" action="{% url 'accountapp:logout' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Logout" />
+        </form>
+        {% endif %}
     </div>
 </div>
