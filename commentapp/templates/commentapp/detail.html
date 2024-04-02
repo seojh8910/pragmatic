@@ -1,33 +1,21 @@
-{% extends 'base.html' %}
-{% load bootstrap4 %}
-
-{% block content %}
-    <div style="text-align: center; max-width: 700px; margin: 4rem auto;">
-        <div>
-            <h1>
-                {{ target_article.title }}
-            </h1>
-            <h5>
-                {{ target_article.writer.profile.nickname }}
-            </h5>
-            <hr>
-            <img  style="width: 100%; border-radius: 1rem; margin: 2rem 0;" src="{{ target_article.image.url }}"/>
-
-            <p>
-                {{ target_article.content }}
-            </p>
-            {% if target_article.writer == user %}
-
-            <a href="{% url 'articleapp:update' pk=target_article.pk %}"
-            class="btn btn-primary rounded-pill col-3">
-                Update Article
-            </a>
-            <a href="{% url 'articleapp:delete' pk=target_article.pk %}"
-            class="btn btn-danger rounded-pill col-3">
-                Delete Article
-            </a>
-            {% endif %}
-        <hr>
-        </div>
+<div style="text-align: left; padding: 5%; margin: 1rem 0; border-radius: 1rem;
+        border: 1px solid #bbb;">
+    <div>
+        <strong>
+            {{ comment.writer.profile.nickname }}
+        </strong>
+        &nbsp&nbsp&nbsp
+        {{ comment.created_at }}
     </div>
-{% endblock %}
+    <div style="margin: 1rem 0;">
+        {{ comment.content }}
+    </div>
+    {% if comment.writer == user %}
+    <div style="text-align: right;">
+        <a href="{% url 'commentapp:delete' pk=comment.pk %}"
+            class=" btn btn-danger rounded-pill">
+            Delete
+        </a>
+    </div>
+    {% endif %}
+</div>
